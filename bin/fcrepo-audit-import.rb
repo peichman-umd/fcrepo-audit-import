@@ -10,8 +10,8 @@ class FileNotFound < StandardError; end
 # Our default values
 hostname = Socket.gethostname.chomp
 source_url = "https://#{hostname}/fcrepo/rest/audit"
-target_url = "https://#{hostname}/fuseki/fcrepo-audit/data"
-keystore = "/apps/fedora/ssl/backup-client.p12" 
+target_url = "https://#{hostname}/fuseki/testing/data"
+keystore = "/apps/fedora/ssl/backup-client.p12"
 password = "changeme"
 threads = 5
 
@@ -32,7 +32,7 @@ begin
   print Rainbow("Enter java keystore file path").white.bg(:red) + "  " + Rainbow("[#{keystore}] > ").cyan.blink
   input = gets.chomp
   _ks = input.length > 0 ? input : keystore
-  raise FileNotFound unless File.exists?(_ks) 
+  raise FileNotFound unless File.exists?(_ks)
 rescue FileNotFound
   puts Rainbow("File #{_ks} not found. Please try again").red
   retry
@@ -50,15 +50,15 @@ threads = input.to_i if input.length > 0
 
 begin
 
-  AuditResponseHandler.threads= threads 
+  AuditResponseHandler.threads= threads
   FCKeyStore.initialize_keystore( keystore, password  )
 
-  RDFMigrator.set_target(target_url)  
-  
+  RDFMigrator.set_target(target_url)
+
   FCClient.instance.start
 
   uris_request = HttpAsyncMethods.create_get(source_url)
-  response = FCClient.instance.client.execute(uris_request, AuditResponseHandler.new, nil)  
+  response = FCClient.instance.client.execute(uris_request, AuditResponseHandler.new, nil)
   queue = response.get
   while ( queue.size > 0 )
     sleep 5

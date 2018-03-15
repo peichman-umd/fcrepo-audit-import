@@ -8,6 +8,16 @@
   <name>FusekiMigrator</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-    <dependency><groupId>org.apache.httpcomponents</groupId><artifactId>httpasyncclient</artifactId><version>4.1.3</version></dependency> 
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpasyncclient</artifactId>
+      <version>4.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.jena</groupId>
+      <artifactId>apache-jena-libs</artifactId>
+      <type>pom</type>
+      <version>3.6.0</version>
+    </dependency>
   </dependencies>
 </project>
