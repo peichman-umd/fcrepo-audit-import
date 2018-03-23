@@ -5,3 +5,4 @@ bin/pry
 bin/rake
 bin/warble
 *.jar
+*.pom
