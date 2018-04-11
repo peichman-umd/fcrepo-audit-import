@@ -13,7 +13,7 @@ keystore = "/apps/fedora/ssl/backup-client.p12"
 password = "changeme"
 threads = 5
 
-if File.new("/dev/stdin").isatty
+if STDIN.isatty
   # if STDIN is a terminal, present prompts
   # otherwise, use defaults
   puts Rainbow("*" * 100 ).red
